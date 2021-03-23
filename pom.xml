@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+    <groupId>org.example</groupId>
+    <artifactId>demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.pi4j/pi4j-core -->
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-core</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.pi4j/pi4j-device -->
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-device</artifactId>
+            <version>1.3</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.pi4j/pi4j-gpio-extension -->
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-gpio-extension</artifactId>
+            <version>1.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.diozero</groupId>
+            <artifactId>diozero-core</artifactId>
+            <version>1.1.5</version>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <!-- 프로젝트 루트에 jar를 만들기 위해 아래의 변수를 설정했다. -->
+                    <outputDirectory>${project.basedir}</outputDirectory>
+                    <archive>
+                        <manifest>
+                            <!-- FQCN으로 public static void main(String[] args)가 있는 메인 클래스를 넣자 -->
+                            <mainClass>com.kosta.App</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
